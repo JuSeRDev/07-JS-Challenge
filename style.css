@@ -33,7 +33,10 @@ body{
 }
 
 .container{
-    display: flex;
+    display: flex;    
+    align-items: self-start;
+    gap: 50px;
+    margin-bottom: 100px;
 }
 
 .title{
@@ -48,11 +51,14 @@ body{
 
 .containerCards{
     width: 250px;
+    padding: 5px;
+    border-radius: 50px;
 }
 
 .containerCardsImgs{
     width: 100%;
     border-radius: 15px;
+    border: none;
 }
 
 .buttons{
@@ -80,17 +86,17 @@ body{
     background: var(--Rose-50);
     cursor: pointer;
     font-size: 12px;
-    display: none;
+    display: flex;
 }
 
 .button1:hover{
     color: var(--Red);
-    border: 2px solid var(--Red);
+    border: 1px solid var(--Red);
 }
 
 
 .button2{
-    display: flex;
+    display: none;
     justify-content: space-around;
     background: var(--Red);
     border-radius: 25px;
@@ -104,6 +110,17 @@ body{
     width: 20px;
     height: 20px;
     padding: 5px;
+    cursor: pointer;
+    fill: var(--Rose-50);
+}
+.iconPlus{
+    padding-left: 4px;
+}
+
+.iconPlus:hover, .iconMenus:hover{
+    border: none;
+    background: var(--Rose-50);
+    fill: var(--Red);
 }
 
 .containerCardsTexts{
@@ -126,6 +143,94 @@ body{
     color: var(--Red);
     font-weight: 500;
 }
+
+.buyContanierGeneral{
+    width: 450px;
+    max-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: var(--Rose-50);
+    border-radius: 15px;
+}
+
+.cokeContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coke{
+    width: 200px;
+    height: auto;
+    margin: 20px 0 0;
+}
+
+.buysContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    
+}
+
+.buys{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--Rose-100);
+}
+
+.yourCard{
+    color: var(--Red);
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.titleProduct{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    
+}
+
+.buyName{
+    font-size: 16pxpx;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.productsBuys{
+    display: flex;
+    gap: 5px;
+}
+
+.buysCount, .buysPrice, .buysTotalPrice{
+    font-size: 15px;
+}
+
+.buysCount{
+    color: var(--Red);
+    font-weight: 500;
+}
+
+
+.buysPrice{
+    color: var(--Rose-400);
+}
+
+.textBuysEmptyContainer{
+    margin-bottom: 50px;
+    color: var(--Rose-400);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+
 
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
