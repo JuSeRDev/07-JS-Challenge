@@ -24,6 +24,7 @@
 body{
     width: 100%;
     height: 100%;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -146,13 +147,14 @@ body{
 
 .buyContanierGeneral{
     width: 450px;
-    max-height: auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     background: var(--Rose-50);
     border-radius: 15px;
+    padding: 20px;
 }
 
 .cokeContainer{
@@ -230,6 +232,37 @@ body{
     font-size: 14px;
 }
 
+.total{
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.orderTotal{
+    color: var(--Rose-900);
+    font-size: 10px;
+}
+
+.message{
+    display: none;
+    width: 95%;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--Rose-100);
+}
+
+.messageTree{
+    color: var(--Rose-500);
+}
+
+.messageTree span{
+    color: var(--Rose-900);
+}
 
 
 .attribution { font-size: 11px; text-align: center; }

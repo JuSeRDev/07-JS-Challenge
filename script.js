@@ -2,11 +2,22 @@
 fetch("./data.json")
 .then(Response => Response.json())
 .then(data=>{
+
     let totalSumProducts = 0
     let sumProducts = []
     let sumTotales =[]
-    let TotalSumTotales = 0
+    let totalSumTotales = 0
+
     const yourCardSpan = document.querySelector(".yourCardSpan")
+
+    // Función para actualizar el total de productos usando forEach
+    const updateTotalProdcuts = ()=>{
+        totalSumProducts = 0
+            sumProducts.forEach(num =>{
+                totalSumProducts += num
+            })
+            yourCardSpan.innerHTML = `${totalSumProducts}`
+    }
 
     data.forEach(product => {
         
@@ -48,8 +59,6 @@ fetch("./data.json")
         `
         productsCards.appendChild(card)
         
-        
-
         // hago la seleccion dentro de la tarjeta "card" que es la que crea el div con todo el contendio
         const button = card.querySelector(".button1")
         const button2 = card.querySelector(".button2")
@@ -57,6 +66,9 @@ fetch("./data.json")
         const containerCardsImgs = card.querySelector(".containerCardsImgs")
         const coke = document.querySelector(".coke")
         const textBuysEmptyContainer = document.querySelector(".textBuysEmptyContainer")
+        const total = document.querySelector(".total")
+        const priceTotal = document.querySelector(".priceTotal")
+        const message = document.querySelector(".message")
 
         button.addEventListener("click", ()=>{
 
@@ -68,26 +80,30 @@ fetch("./data.json")
                 resultado += price
             }
 
+             // funcion para actualizar el precio final
+            const finalResult = ()=>{
+                totalSumTotales = 0
+                sumTotales.forEach(num =>{
+                    totalSumTotales += num
+                })
+                priceTotal.textContent = `$${totalSumTotales.toFixed(2)}`
+            }
+            
             button.style.display = "none"
             button2.style.display = "flex"
             containerCardsImgs.style.border = "3px solid var(--Red)"
+            total.style.display = "flex"
+            message.style.display = "flex"
             numButton++
             spanCount.textContent = numButton
             coke.style.display = "none"
             sumPrice()
+            sumProducts.push(1)
+            updateTotalProdcuts()
 
-            sumProducts.push(numButton)
-
-            totalSumProducts = 0
-            sumProducts.forEach(num =>{
-                totalSumProducts += num
-            })
-
-            yourCardSpan.innerHTML = `${totalSumProducts}`
             textBuysEmptyContainer.style.display = "none"
 
-
-            // aqui comienza la tarjeta de compras
+            //aqui comienza la tarjeta de compras
             const iconRemoveIten = `<svg class="iconRemove" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path fill="#CAAFA7" d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"/></svg>`
 
             const buysContainer = document.querySelector(".buysContainer")
@@ -105,47 +121,70 @@ fetch("./data.json")
             </div>
             ${iconRemoveIten}
             `
-            sumTotales.push(parseFloat(resultado))
-            
-            TotalSumTotales = 0
-            sumTotales.forEach(num => {
-                TotalSumTotales += num
-            });
-
-            console.log(sumTotales);
-            console.log(` boton grande ${TotalSumTotales}`)
-
             buysContainer.appendChild(cardBuysContainer)
 
+            sumTotales.push(parseFloat(price))
+            finalResult()
+
+            // aqui comienza la accion del boton sumar
+            const buysTotalPrice = cardBuysContainer.querySelector(".buysTotalPrice")
+            const buysCount = cardBuysContainer.querySelector(".buysCount")
             const iconPlusButton = card.querySelector(".iconPlus")
+            const iconMenusButton = card.querySelector(".iconMenus")
+
             iconPlusButton.addEventListener("click", ()=>{
-                const buysTotalPrice = cardBuysContainer.querySelector(".buysTotalPrice")
-                const buysCount = cardBuysContainer.querySelector(".buysCount")
                 numButton++
                 sumProducts.push(1)
-
-                totalSumProducts = 0
-                sumProducts.forEach(num =>{
-                    totalSumProducts += num
-                })
-                yourCardSpan.innerHTML = `${totalSumProducts}`
-
+                updateTotalProdcuts()
+                if (numButton > 0) { 
+                    containerCardsImgs.style.border = "3px solid var(--Red)"
+                }
+                
                 buysCount.textContent = `${numButton}x`
                 resultado = parseFloat(numButton * price).toFixed(2)
                 buysTotalPrice.textContent = `${resultado}`
                 spanCount.innerHTML = `${numButton}`
-
+    
                 sumTotales.push(parseFloat(price))
-
-                TotalSumTotales = 0
-                sumTotales.forEach(num =>{
-                    TotalSumTotales += num
-                })
-                console.log(sumTotales);
-                console.log(` boton mas ${TotalSumTotales}`)
+                finalResult()
                 
+                if (cardBuysContainer.style.display = "none") {
+                    cardBuysContainer.style.display = "flex"
+                }
+
+                if (numButton >= 1) {
+                    message.style.display = "flex"
+                }
             })
-           
+            
+            iconMenusButton.addEventListener("click", ()=>{
+                if (numButton > 0) {
+                    
+                    numButton--
+                    sumProducts.splice(sumProducts.length -1, 1)
+                    
+                    updateTotalProdcuts()
+                    buysCount.textContent = `${numButton}x`
+                    
+                    resultado = parseFloat(numButton * price).toFixed(2)
+                    buysTotalPrice.textContent = `${resultado}`
+                    spanCount.innerHTML = `${numButton}`
+                    
+                    const index = sumTotales.lastIndexOf(parseFloat(price))
+                    if (index > -1) {
+                        sumTotales.splice(index, 1)
+                    }
+                }
+                finalResult()
+    
+                if (numButton === 0) {
+                    containerCardsImgs.style.border = "none"
+                    cardBuysContainer.style.display = "none"
+                    message.style.display = "none"
+                    // button.style.display = "flex"
+                    // button2.style.display = "none"
+                }
+            })
         })
     });
 })
