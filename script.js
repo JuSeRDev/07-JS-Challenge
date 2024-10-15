@@ -14,10 +14,13 @@ fetch("./data.json")
             resultTotal += num
         })
     }
+
+    const comfirmButton = document.querySelector(".comfirmButton")
     
     data.forEach(product => {
         
         const imageDesktop = product.image.desktop
+        const imageConfirm = product.image.thumbnail
         const name = product.name
         const category = product.category
         const price = parseFloat(product.price).toFixed(2)
@@ -68,6 +71,34 @@ fetch("./data.json")
         cardBuysContainer.style.display = "none"
         buysContainer.appendChild(cardBuysContainer)
 
+        // CONTENEDOR DE CONFIRMACION
+
+        const buysContainerConfirm = document.querySelector(".buysContainerConfirm")
+        const cardBuysContainer2 = document.createElement("div")
+        cardBuysContainer2.classList.add("buys2")
+        cardBuysContainer2.innerHTML = `
+
+        <div class="titleProduct2">
+            <img class="containerCardsImgsConfirm" src="${imageConfirm}" alt="producto">
+            <div class="productsBuysContainer2">
+                <p class="buyName2">${name}</p>
+                <div class="productsBuys2">
+                    <p class="buysCount2">1x</p>
+                    <p class="buysPrice2">@ $${price}</p>
+                </div>
+            </div>
+            <p class="buysTotalPrice2">$${price}</p>
+        </div>
+        `
+
+        buysContainerConfirm.appendChild(cardBuysContainer2)
+
+        const buysCount2 = cardBuysContainer2.querySelector(".buysCount2")
+        const buysTotalPrice2 = cardBuysContainer2.querySelector(".buysTotalPrice2")
+        const totalPrice2 = document.querySelector(".totalPrice2")
+        
+
+
         // FUNCIONES
         const sumResultProduct = ()=>{
             ResultProduct = 0
@@ -78,6 +109,7 @@ fetch("./data.json")
             resultArray.push(parseFloat(price))
             sumResultTotal()
             priceTotal.textContent = `$${resultTotal.toFixed(2)}`
+            totalPrice2.textContent = `$${resultTotal.toFixed(2)}`
         }
 
         const updateCartVisibility = ()=>{
@@ -93,6 +125,7 @@ fetch("./data.json")
                 total.style.display = "none"
                 message.style.display = "none"
                 comfirmButton.style.display = "none"
+                textBuysEmptyContainer.style.display = "flex"
             }
         }
 
@@ -115,7 +148,6 @@ fetch("./data.json")
         const yourCardSpan = document.querySelector(".yourCardSpan")
         const total = document.querySelector(".total")
         const priceTotal = document.querySelector(".priceTotal")
-        const comfirmButton = document.querySelector(".comfirmButton")
         const containerCardsImgs = card.querySelector(".containerCardsImgs")
 
         addToCart.addEventListener("click", ()=>{
@@ -139,6 +171,9 @@ fetch("./data.json")
             updateTotalSum()
             textBuysEmptyContainer.style.display = "none"
             buysTotalPrice.textContent = `$${price}`
+
+            // DESPUES DE DAR CONTINUAR
+            cardBuysContainer2.style.display = "flex"
         })
 
         //CREACION DEL BOTON ICONPLUS
@@ -157,6 +192,10 @@ fetch("./data.json")
 
             buysTotalPrice.textContent = `$${ResultProduct.toFixed(2)}`
             updateTotalSum()
+
+            // DESPUES DE DAR CONTINUAR
+            buysCount2.textContent = `${numX}x`
+            buysTotalPrice2.textContent = `$${ResultProduct.toFixed(2)}`
         })
 
         // CREACION DE BOTON ICONMENUS
@@ -176,6 +215,10 @@ fetch("./data.json")
             sumResultTotal()
             buysTotalPrice.textContent = `$${ResultProduct.toFixed(2)}`
             priceTotal.textContent = `$${resultTotal.toFixed(2)}`
+
+            // DESPUES DE DAR CONTINUAR
+            buysCount2.textContent = `${numX}x`
+            buysTotalPrice2.textContent = `$${ResultProduct.toFixed(2)}`
         })
 
         // BOTON X ICONREMOVEITEN
@@ -189,8 +232,15 @@ fetch("./data.json")
             buysTotalPrice.textContent = `$${price}` // imprime el valor del precio en la tabla de selccion
             sumResultTotal() // esta funcion me suma el contenido del array
             priceTotal.textContent = `$${resultTotal.toFixed(2)}`
-        })
-    });
+        })   
+    })
+    const background = document.querySelector(".background")
+
+    // CREACION DE BOTON DE CONFIRMACION DE COMPRA
+    comfirmButton.addEventListener("click", ()=>{
+        background.style.display = "flex"
+    })
+    
 })
 
 

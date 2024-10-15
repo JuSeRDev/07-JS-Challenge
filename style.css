@@ -14,6 +14,7 @@
     
     --Rose-50: hsl(20, 50%, 98%);
     --Rose-100: hsl(13, 31%, 94%);
+    --Rose-200: hsl(0, 2%, 90%);
     --Rose-300: hsl(14, 25%, 72%);
     --Rose-400: hsl(7, 20%, 60%);
     --Rose-500: hsl(12, 20%, 44%);
@@ -286,14 +287,125 @@ body{
     background: var(--Green);
 }
 
-.buysContainerConfirm{
-    display: flex;
-    width: 300px;
-    height: 100px;
+.background{
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.419);
     position: absolute;
-    background: red;
-    right: 50%;
-    top: 50%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectedContainer{
+    background: var(--Rose-50);
+    border-radius: 20px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buysContainerConfirm{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--Rose-100);
+    border-radius: 15px 15px 0 0;
+}
+
+.imageCheck{
+    width: 90%;
+    padding: 30px 0;
+}
+
+.orderConfirmed{
+    width: 90%;
+    font-size: 40px;
+}
+
+.textConfirm{
+    width: 90%;
+    padding: 15px 0 30px;
+    font-size: 10px;
+    color: var(--Rose-400);
+}
+
+.buys2{
+    width: 100%;
+    display: none;
+    justify-content: center;
+    padding: 5px 0;
+}
+
+.containerCardsImgsConfirm{
+    width: 60px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+.titleProduct2{
+    display: flex;
+    width: 90%;
+    align-items: center;
+    border-bottom: 1px solid var(--Rose-200);
+}
+.productsBuys2{
+    display: flex;
+    width: 100%;
+}
+
+.productsBuysContainer2{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.buyName2{
+    color: var(--Rose-900);
+    font-weight: 600;
+    font-size: 10px;
+}
+
+.buysCount2{
+    color: var(--Red);
+    margin-right: 20px;
+    font-size: 10px;
+}
+
+.buysPrice2{
+    color: var(--Rose-400);
+}
+
+.buysTotalPrice2{
+    color: var(--Rose-900);
+    font-weight: 600;
+}
+
+.StarNewOrder{
+    padding: 15px;
+    background: var(--Red);
+    margin: 30px;
+    width: 90%;
+    border-radius: 25px;
+    color: var(--Rose-50);
+    text-align: center;
+}
+
+.containerTotal2{
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: var(--Rose-100);
+    border-radius: 0px 0px 15px 15px;
 }
 
 
