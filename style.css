@@ -288,8 +288,8 @@ body{
 }
 
 .background{
-    width: 100vw;
-    height: 100vh;
+    width: 200vw;
+    height: 130vh;
     background: rgba(0, 0, 0, 0.419);
     position: absolute;
     display: none;
@@ -396,6 +396,12 @@ body{
     border-radius: 25px;
     color: var(--Rose-50);
     text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.StarNewOrder:hover{
+    background: var(--Rose-500);
 }
 
 .containerTotal2{
