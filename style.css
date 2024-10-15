@@ -286,6 +286,16 @@ body{
     background: var(--Green);
 }
 
+.buysContainerConfirm{
+    display: flex;
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    background: red;
+    right: 50%;
+    top: 50%;
+}
+
 
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }

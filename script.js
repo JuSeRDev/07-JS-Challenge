@@ -73,7 +73,7 @@ fetch("./data.json")
             ResultProduct = 0
             ResultProduct = numX * price
         }
-
+        
         const updateTotalSum = ()=>{
             resultArray.push(parseFloat(price))
             sumResultTotal()
@@ -95,6 +95,10 @@ fetch("./data.json")
                 comfirmButton.style.display = "none"
             }
         }
+
+        const removeAllOccurrences = (valueToRemove) => {
+            resultArray = resultArray.filter(value => value !== valueToRemove);
+        };
 
         // CREACION DEL BOTON ICONPLUS
         let numX = 0 // esta variable debe estar fuera de los botones
@@ -134,7 +138,7 @@ fetch("./data.json")
             buysCount.textContent = `${numX}x`
             updateTotalSum()
             textBuysEmptyContainer.style.display = "none"
-            buysTotalPrice.textContent = `${price}`
+            buysTotalPrice.textContent = `$${price}`
         })
 
         //CREACION DEL BOTON ICONPLUS
@@ -151,7 +155,7 @@ fetch("./data.json")
             spanNumber.textContent = `${numX}`
             sumResultProduct()
 
-            buysTotalPrice.textContent = `${ResultProduct.toFixed(2)}`
+            buysTotalPrice.textContent = `$${ResultProduct.toFixed(2)}`
             updateTotalSum()
         })
 
@@ -170,27 +174,21 @@ fetch("./data.json")
             resultArray.pop()
             sumResultProduct()
             sumResultTotal()
-            buysTotalPrice.textContent = `${ResultProduct.toFixed(2)}`
+            buysTotalPrice.textContent = `$${ResultProduct.toFixed(2)}`
             priceTotal.textContent = `$${resultTotal.toFixed(2)}`
         })
 
         // BOTON X ICONREMOVEITEN
         const iconRemove = cardBuysContainer.querySelector(".iconRemove")
         iconRemove.addEventListener("click", ()=>{
-            console.log("precionaste la x")
             numButton = numButton - numX
-            console.log(`este es el resltado de numButton cuando se preciona la x ${numButton}`)
+            yourCardSpan.textContent = `${numButton}` //imprime el nuevo valor
             numX = 0
+            removeAllOccurrences(parseFloat(price))
             updateCartVisibility()
-            yourCardSpan.textContent = `${numButton}`
-            buysTotalPrice.textContent = `${price}`
-            updateTotalSum()
-            
-            sumResultTotal()
+            buysTotalPrice.textContent = `$${price}` // imprime el valor del precio en la tabla de selccion
+            sumResultTotal() // esta funcion me suma el contenido del array
             priceTotal.textContent = `$${resultTotal.toFixed(2)}`
-
-            //! esto me esta generando tremendo error con el array final ya que se suma todo, debo verificar que esta sucediendo con los totales para corregir el error.
-
         })
     });
 })
