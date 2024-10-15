@@ -4,8 +4,8 @@ fetch("./data.json")
 
     let numButton = 0 // me muestra la cantidad total de "You Cart (0)"
     let resultArray = [] // guarda todos los valores cuando se da click
+    let ResultProduct = 0
     let resultTotal = 0 // muestra la suma de todos los valores del array
-    let result = 0
 
     //funcion para sumar el total de los productos seleccionados
     const sumResultTotal = ()=>{
@@ -66,7 +66,43 @@ fetch("./data.json")
         ${iconRemoveIten}
         `
         cardBuysContainer.style.display = "none"
-        buysContainer.appendChild(cardBuysContainer)        
+        buysContainer.appendChild(cardBuysContainer)
+
+        // FUNCIONES
+        const sumResultProduct = ()=>{
+            ResultProduct = 0
+            ResultProduct = numX * price
+        }
+
+        const updateTotalSum = ()=>{
+            resultArray.push(parseFloat(price))
+            sumResultTotal()
+            priceTotal.textContent = `$${resultTotal.toFixed(2)}`
+        }
+
+        const updateCartVisibility = ()=>{
+            if (numX === 0) {
+                button.style.display = "none"
+                addToCart.style.display = "flex"
+                cardBuysContainer.style.display = "none"
+                containerCardsImgs.style.border = "none"
+            }
+
+            if (numButton === 0) {
+                coke.style.display = "flex"
+                total.style.display = "none"
+                message.style.display = "none"
+                comfirmButton.style.display = "none"
+            }
+        }
+
+        // CREACION DEL BOTON ICONPLUS
+        let numX = 0 // esta variable debe estar fuera de los botones
+        let buysCount = cardBuysContainer.querySelector(".buysCount")
+        let spanNumber = card.querySelector(".spanNumber")
+        let buysTotalPrice = cardBuysContainer.querySelector(".buysTotalPrice")
+
+        const textBuysEmptyContainer = document.querySelector(".textBuysEmptyContainer")
 
         // CREACION DEL PRIMER BOTON
         const button = card.querySelector(".button2")
@@ -75,6 +111,8 @@ fetch("./data.json")
         const yourCardSpan = document.querySelector(".yourCardSpan")
         const total = document.querySelector(".total")
         const priceTotal = document.querySelector(".priceTotal")
+        const comfirmButton = document.querySelector(".comfirmButton")
+        const containerCardsImgs = card.querySelector(".containerCardsImgs")
 
         addToCart.addEventListener("click", ()=>{
             button.style.display = "flex"
@@ -82,23 +120,80 @@ fetch("./data.json")
             addToCart.style.display = "none"
             cardBuysContainer.style.display = "flex"
 
+            numX++
             numButton++ // contador general
             if (numButton > 0) {
                 message.style.display = "flex"
                 total.style.display = "flex"
+                comfirmButton.style.display = "inline"
+                containerCardsImgs.style.border = "2px solid var(--Red)"
             }
-            console.log(`${numButton}`) // el cambio funciona perfectamente
+
             yourCardSpan.textContent = `${numButton}` // actualiza el contador general
-            
-            resultArray.push(parseFloat(price))
-            console.log(resultArray);
+            spanNumber.textContent = `${numX}`
+            buysCount.textContent = `${numX}x`
+            updateTotalSum()
+            textBuysEmptyContainer.style.display = "none"
+            buysTotalPrice.textContent = `${price}`
+        })
+
+        //CREACION DEL BOTON ICONPLUS
+        const iconPlusButton = card.querySelector(".iconPlus")
+        iconPlusButton.addEventListener("click", ()=>{
+            numX++
+            numButton++
+
+            yourCardSpan.textContent = `${numButton}`
+
             sumResultTotal()
             priceTotal.textContent = `$${resultTotal.toFixed(2)}`
-            console.log(`Imprime resulTotal: ${resultTotal.toFixed(2)}`);
+            buysCount.textContent = `${numX}x`
+            spanNumber.textContent = `${numX}`
+            sumResultProduct()
+
+            buysTotalPrice.textContent = `${ResultProduct.toFixed(2)}`
+            updateTotalSum()
+        })
+
+        // CREACION DE BOTON ICONMENUS
+        const iconMenusButton = card.querySelector(".iconMenus")
+        iconMenusButton.addEventListener("click", ()=>{
+            numX--
+            numButton--
+
+            yourCardSpan.textContent = `${numButton}`
+            buysCount.textContent = `${numX}x`
+            spanNumber.textContent = `${numX}`
+
+            updateCartVisibility()
+
+            resultArray.pop()
+            sumResultProduct()
+            sumResultTotal()
+            buysTotalPrice.textContent = `${ResultProduct.toFixed(2)}`
+            priceTotal.textContent = `$${resultTotal.toFixed(2)}`
+        })
+
+        // BOTON X ICONREMOVEITEN
+        const iconRemove = cardBuysContainer.querySelector(".iconRemove")
+        iconRemove.addEventListener("click", ()=>{
+            console.log("precionaste la x")
+            numButton = numButton - numX
+            console.log(`este es el resltado de numButton cuando se preciona la x ${numButton}`)
+            numX = 0
+            updateCartVisibility()
+            yourCardSpan.textContent = `${numButton}`
+            buysTotalPrice.textContent = `${price}`
+            updateTotalSum()
+            
+            sumResultTotal()
+            priceTotal.textContent = `$${resultTotal.toFixed(2)}`
+
+            //! esto me esta generando tremendo error con el array final ya que se suma todo, debo verificar que esta sucediendo con los totales para corregir el error.
+
         })
     });
 })
-
 
 
 

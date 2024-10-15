@@ -264,6 +264,28 @@ body{
     color: var(--Rose-900);
 }
 
+.comfirmButton{
+    display: none;
+    background: var(--Red);
+    width: 100%;
+    color: var(--Rose-50);
+    font-size: 20px;
+    padding: 20px;
+    border-radius: 30px;
+    border: none;
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.comfirmButton:hover{
+    background: var(--Rose-500);
+}
+
+.comfirmButton:active{
+    background: var(--Green);
+}
+
 
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
