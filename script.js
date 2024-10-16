@@ -133,6 +133,7 @@ fetch("./data.json")
                 addToCart.style.display = "flex"
                 cardBuysContainer.style.display = "none"
                 containerCardsImgs.style.border = "none"
+                cardBuysContainer2.style.display = "none"
             }
 
             if (numButton === 0) {
@@ -141,6 +142,7 @@ fetch("./data.json")
                 message.style.display = "none"
                 comfirmButton.style.display = "none"
                 textBuysEmptyContainer.style.display = "flex"
+                cardBuysContainer2.style.display = "flex"
             }
         }
 
@@ -247,6 +249,12 @@ fetch("./data.json")
             buysTotalPrice.textContent = `$${price}` // imprime el valor del precio en la tabla de selccion
             sumResultTotal() // esta funcion me suma el contenido del array
             priceTotal.textContent = `$${resultTotal.toFixed(2)}`
+            
+
+            // DESPUES DE DAR CONTINUAR
+            buysCount2.textContent = `${numX}x`
+            buysTotalPrice2.textContent = `$${ResultProduct.toFixed(2)}`
+            totalPrice2.textContent = `$${resultTotal.toFixed(2)}`
         })   
     })
     const background = document.querySelector(".background")
