@@ -20,6 +20,7 @@ fetch("./data.json")
     data.forEach(product => {
         
         const imageDesktop = product.image.desktop
+        const imageMobile = product.image.mobile
         const imageConfirm = product.image.thumbnail
         const name = product.name
         const category = product.category
@@ -50,6 +51,22 @@ fetch("./data.json")
         </div>
         `
         productsCards.appendChild(card)
+
+
+
+        // MEDIAQUERY
+        // ESTA FUNCION HACE QUE SE CAMBIE LA IMAGEN CUANDO LA PANTALLA ESTE A UNA MEDIDA ESPECIFICA
+
+        const changeImage = () =>{
+            if (window,innerWidth <= 400) {
+                containerCardsImgs.src = imageMobile
+            } else {
+                containerCardsImgs.src = imageDesktop
+            }
+        }
+        window.addEventListener("load", changeImage)
+        window.addEventListener("resize", changeImage)
+
 
         const iconRemoveIten = `<svg class="iconRemove" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path fill="#CAAFA7" d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"/></svg>`
 
@@ -97,8 +114,6 @@ fetch("./data.json")
         const buysTotalPrice2 = cardBuysContainer2.querySelector(".buysTotalPrice2")
         const totalPrice2 = document.querySelector(".totalPrice2")
         
-
-
         // FUNCIONES
         const sumResultProduct = ()=>{
             ResultProduct = 0

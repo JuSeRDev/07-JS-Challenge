@@ -418,3 +418,51 @@ body{
 
 .attribution { font-size: 11px; text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
+
+@media (max-width: 400px) {
+    body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+    }
+
+    .container{
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .containerCardsImgs{
+        width: 330px;
+    }
+
+    .productsContainer{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .productsCards{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .containerCards{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .containerCardsTexts{
+        width: 300px;
+        align-items: flex-start;
+    }
+
+    .buyContanierGeneral{
+        width: 300px;
+    }
+
+}
